@@ -1,0 +1,56 @@
+@startuml
+!theme cerulean-outline
+
+
+class BancoDeSangre {
+  - donantes: List<Donante>
+  - direccion: String
+  - empleado: List<Empleado>
+  + buscarMostrarDatosDonante(CI: String): Donante
+  + getDonantesMayorCantidadDonaciones(): List<Donante>
+  + getDonantesOPositivoSinDonacionesDesdeMes(mes: String): List<Donante>
+  + getDonantesOrdenadosPorNombreApellidos(): List<Donante>
+  + getDonantesOrdenadosPorGrupoSanguineoYFactorRH(): List<Donante>
+  + agregarEmpleado(empleado: Empleado): void
+  + eliminarEmpleado(CI: String): void
+  + modificarEmpleado(CI: String, empleado: Empleado): void
+  + agregarDonante(donante: Donante): void
+  + eliminarDonante(CI: String): void
+  + modificarDonante(CI: String, donante: Donante): void
+  + agregarDonacion(donacion: Donacion): void
+  + eliminarDonacion(codigoBolsa: String): void
+  + modificarDonacion(codigoBolsa: String): void
+
+  }
+
+class Empleado {
+  - CI: String
+  - nombre: String
+  - apellidos: String
+  - direccion: String
+  - cargoDesempeña: String
+  }
+
+class Donante {
+  - CI: String
+  - nombre: String
+  - apellidos: String
+  - grupoSanguineo: String
+  - factorRH: String
+  - direccion: String
+  - observaciones: String
+  - donaciones: List<Donacion>
+  }
+
+class Donacion {
+  - fecha: String
+  - volumen: double
+  - codigoBolsa: String
+  - localizacionActual: String
+  - CIEmpleadoExtraccion: String
+  }
+
+BancoDeSangre "1" -- "1..*" Empleado
+BancoDeSangre "1" -- "0..*" Donante
+Donante "1" -- "1..*" Donacion
+@enduml
